@@ -78,7 +78,7 @@ class Repassword extends Controller{
 	//忘记密码，修改密码动作
 	public function do_repassword(){
 		$s_num = input('s_num');
-		echo $s_num;die;
+		echo $s_num;
 		$data = \think\Db::name("repassword")->where('s_num',$s_num)->find();
 	}
 }
