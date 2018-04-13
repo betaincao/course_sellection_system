@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>账号管理 - 计算机学院在线选课系统</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<!-- 重置样式 -->
+	<link href="__PUBLIC__/static/front/css/reset.css" rel="stylesheet">
+	<!-- 引入bootstrap CSS -->
+	<link href="__PUBLIC__/static/front/css/bootstrap.css" rel="stylesheet">
+	<!-- 引入bootstrap 图标 -->
+	<link href="__PUBLIC__/static/front/css/font.min.css" rel="stylesheet">
+	<!-- 核心CSS -->
+	<link href="__PUBLIC__/static/front/css/studentSet.css" rel="stylesheet">
+	<style>
+		#modalWarp{
+			display: none;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.4);
+			position: absolute;
+			top: 0;
+		}
+		#modal{
+			width: 300px;
+			height: 220px;
+			background: white;
+			border-radius: 8px;
+
+			position: absolute;
+			left: 0;right: 0;
+			top: 0;bottom: 0;
+			margin: auto;
+		}
+		#modal h2{
+			width: 100%;
+			line-height: 30px;
+			font-size: 20px;
+
+			text-align: center;
+		}
+		#modal input{
+			display: block;
+			width: 80%;
+			padding: 5px;
+			margin: 15px auto;
+		}
+	</style>
+</head>
+<body>
+	<!-- 头部导航 -->
+    <div class="header">
+        <div class=".layout-logo">
+            <img src="__PUBLIC__/static/front/images/logo.png" alt="" class="layout-logo">
+        </div>
+        <div class="layout-user">
+            <p class="user-out btn btn-info btn-sm"><a href="{:url('login/logout')}">退出登录</a></p>
+        </div>
+    </div>
+	<!-- 核心内容 -->
+	<div class="wrap clearfix">
+		<div class="left-list">
+			<!-- 左侧头像 -->
+			<div class="list-img">
+				<a href=""><img src="__PUBLIC__/static/front/images/user-icon.png" alt="用户头像" title="用户头像"></a>
+			</div>
+			<!-- 左侧姓名 -->
+			<div class="list-name">
+				<span>{:session('name')}</span>
+			</div>
+			<!-- 左侧选项 -->
+			<div class="list-options">
+                    <ul>
+                        <a href="{:url('teacher/teaching')}">
+                            <li>
+                                <span class="icon icon-user-md">&nbsp;</span>
+                                所授课程
+                            </li>
+                        </a>
+                        <a href="{:url('teacher/notice')}">
+                            <li>
+                                <span class="icon icon-bell-alt">&nbsp;</span>
+                                系统通知
+                            </li>
+                        </a>
+                        <a href="{:url('teacher/info')}">
+                            <li class="active">
+                                <span class="icon icon-cog">&nbsp;</span>
+                                账号管理
+                            </li>
+                        </a>
+                    
+                    </ul>
+            </div>
+		</div>
+
+		<div class="right-cont">
+			<!-- 右侧标题 -->
+			<div class="cont-title">
+				管理我的账号
+			</div>
+			<!-- 右侧主体 -->
+			<div class="cont-main clearfix">
+                <div class="main-list clearfix">
+                    <div class="list-opt">工号：</div>
+                    <div class="list-cont">{$teacher['t_num']}</div>
+                </div>
+				<div class="main-list clearfix">
+					<div class="list-opt">姓名：</div>
+					<div class="list-cont">{$teacher['name']}</div>
+				</div>
+				<div class="main-list clearfix">
+					<div class="list-opt">性别：</div>
+					<div class="list-cont">{$teacher['t_sex']}</div>
+                </div>
+                <div class="main-list clearfix">
+                        <div class="list-opt">学院：</div>
+                        <div class="list-cont">{$teacher['t_school']}</div>
+                </div>
+                <div class="main-list clearfix">
+                            <div class="list-opt">系部：</div>
+                            <div class="list-cont">{$teacher['t_department']}</div>
+                        </div>
+				<div class="main-list clearfix">
+					<div class="list-opt">邮箱：</div>
+					<div class="list-cont">{$teacher['t_mail']}</div>
+					<button class="btn btn-danger btn-sm" id="modifyBtn">修改邮箱</button>
+				</div>
+				<div class="main-list clearfix">
+					<div class="list-opt">密码：</div>
+					<div class="list-cont">******</div>
+					<a class="btn btn-danger btn-sm" href="">修改密码</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 底部版权 -->
+	<div class="layout-copy">
+	    2017 &copy; 西安邮电大学
+	</div>
+
+	<div id="modalWarp">
+		<div id="modal">
+			<form action="{:url('changemail')}" method="POST">
+				<h2>修改邮箱</h2>
+				<input type="password" placeholder="请输入您的密码" name="password" required="" maxlength="6" minlength="6">
+				<input type="email" placeholder="请输入新的邮箱地址" name="email">
+				<input type="submit" class="btn btn-danger" value="确认修改">
+			</form>
+		</div>
+	</div>
+
+	<script>
+		var oModifyBtn = document.getElementById('modifyBtn');
+		var oModalWarp = document.getElementById('modalWarp');
+		var oModal = document.getElementById('modal');
+		oModifyBtn.onclick = function () {
+			oModalWarp.style.display = 'block';
+		}
+		oModalWarp.onclick = function () {
+			oModalWarp.style.display = 'none';
+		}
+		oModal.onclick = function (e) {
+			window.event ? window.event.cancelBubble = true : e.stopPropagation();
+		}
+	</script>
+</body>
+</html>

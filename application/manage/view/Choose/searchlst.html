@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算机学院网上选课系统后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+    {include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:url('Choose/lst')}">选课信息管理</a><span class="crumb-step">&gt;</span><span>通过学号查找</span></div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th width="8%">学号</th>
+                            <th width="8%">课程号</th>
+                            <th width="8%">学生选择状态</th>
+                            <th width="20%">操作</th>
+                        </tr>
+                        {volist name="sc" id="vo"}
+                        <tr>
+                            <td>{$vo.s_num}</td>
+                            <td>{$vo.c_id}</td>
+                            <td>{$vo.sc_type}</td>
+                            <td>
+                                <a class="link-del" onclick="return confirm('你确定要删除该学生的信息吗？');" href="{:url('del',array('sc_id'=>$vo.sc_id))}">删除</a>
+                            </td>
+                        </tr>
+                        {/volist}
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

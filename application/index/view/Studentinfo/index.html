@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>账号管理 - 计算机学院在线选课系统</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<!-- 重置样式 -->
+	<link href="__PUBLIC__/static/front/css/reset.css" rel="stylesheet">
+	<!-- 引入bootstrap CSS -->
+	<link href="__PUBLIC__/static/front/css/bootstrap.css" rel="stylesheet">
+	<!-- 引入bootstrap 图标 -->
+	<link href="__PUBLIC__/static/front/css/font.min.css" rel="stylesheet">
+	<!-- 核心CSS -->
+	<link href="__PUBLIC__/static/front/css/studentSet.css" rel="stylesheet">
+	<style>
+		#modalEmailWarp,#modalPwdWarp{
+			display: none;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.4);
+			position: absolute;
+			top: 0;
+		}
+		#modalEmail,#modalPwd{
+			width: 300px;
+			height: 220px;
+			background: white;
+			border-radius: 8px;
+
+			position: absolute;
+			left: 0;right: 0;
+			top: 0;bottom: 0;
+			margin: auto;
+		}
+		#modalPwd{
+			height: 260px;
+		}
+		#modalEmail h2,#modalPwd h2{
+			width: 100%;
+			line-height: 30px;
+			font-size: 20px;
+
+			text-align: center;
+		}
+		#modalEmail input,#modalPwd input{
+			display: block;
+			width: 80%;
+			padding: 5px;
+			margin: 15px auto;
+		}
+	</style>
+</head>
+<body>
+	<!-- 头部导航 -->
+    <div class="header">
+        <div class=".layout-logo">
+            <img src="__PUBLIC__/static/front/images/logo.png" alt="" class="layout-logo">
+        </div>
+        <div class="layout-user">
+            <p class="user-out btn btn-info btn-sm"><a href="{:url('login/logout')}">退出登录</a></p>
+        </div>
+    </div>
+	<!-- 核心内容 -->
+	<div class="wrap clearfix">
+		<div class="left-list">
+			<!-- 左侧头像 -->
+			<div class="list-img">
+				<a href=""><img src="__PUBLIC__/static/front/images/user-icon.png" alt="用户头像" title="用户头像"></a>
+			</div>
+			<!-- 左侧姓名 -->
+			<div class="list-name">
+				<span>{:session('name')}</span>
+			</div>
+			<!-- 左侧选项 -->
+			<div class="list-options">
+				<ul>
+					<a href="{:url('Studentcourse/lst')}">
+						<li>
+							<span class="icon icon-user-md">&nbsp;</span>
+							我的课程
+						</li>
+					</a>
+					<a href="{:url('Unselected/lst')}">
+						<li>
+							<span class="icon icon-align-justify">&nbsp;</span>
+							课程列表
+						</li>
+					</a>
+					<a href="{:url('Notice/index')}">
+						<li>
+							<span class="icon icon-bell-alt">&nbsp;</span>
+							系统通知
+						</li>
+					</a>
+					<a href="{:url('Studentinfo/index')}">
+						<li class="active">
+							<span class="icon icon-cog">&nbsp;</span>
+							账号管理
+						</li>
+					</a>
+				</ul>
+			</div>
+		</div>
+
+		<div class="right-cont">
+			<!-- 右侧标题 -->
+			<div class="cont-title">
+				管理我的账号
+			</div>
+			<!-- 右侧主体 -->
+			<div class="cont-main clearfix">
+				<div class="main-list clearfix">
+					<div class="list-opt">姓名：</div>
+					<div class="list-cont">{$student['name']}</div>
+				</div>
+				<div class="main-list clearfix">
+					<div class="list-opt">性别：</div>
+					<div class="list-cont">{$student['s_sex']}</div>
+				</div>
+				<div class="main-list clearfix">
+					<div class="list-opt">学号：</div>
+					<div class="list-cont">{$student['s_num']}</div>
+				</div>
+				<div class="main-list clearfix">
+					<div class="list-opt">邮箱：</div>
+					<div class="list-cont">{$student['s_mail']}</div>
+					<button class="btn btn-danger btn-sm" id="modifyEmailBtn">修改邮箱</button>
+				</div>
+				<div class="main-list clearfix">
+					<div class="list-opt">密码：</div>
+					<div class="list-cont">******</div>
+					<a class="btn btn-danger btn-sm" id="modifyPwdBtn">修改密码</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 底部版权 -->
+	<div class="layout-copy">
+	    2017 &copy; 西安邮电大学
+	</div>
+	<!--修改邮箱 -->
+	<div id="modalEmailWarp">
+		<div id="modalEmail">
+			<form action="{:url('changemail')}" method="POST">
+				<h2>修改邮箱</h2>
+				<input type="password" placeholder="请输入您的密码" name="password" required="" maxlength="16" minlength="6">
+				<input type="email" placeholder="请输入新的邮箱地址" name="email">
+				<input type="submit" class="btn btn-danger" value="确认修改">
+			</form>
+		</div>
+	</div>
+	<!--修改密码-->
+	<div id="modalPwdWarp">
+		<div id="modalPwd">
+			<form action="{:url('changepwd')}" method="POST" id="modifyPwdForm">
+				<h2>修改密码</h2>
+				<input type="password" placeholder="请输入当前密码" name="password" id="oldPassword" required maxlength="16" minlength="6">
+				<input type="password" placeholder="请输入输入新密码" name="newPassword" id="newPassword" required maxlength="16" minlength="6">
+				<input type="password" placeholder="请输入重复新密码" name="renewPassword" id="reNewPassword" required maxlength="16" minlength="6">
+				<input type="button" class="btn btn-danger" id="submitPassword" value="确认修改">
+			</form>
+		</div>
+	</div>
+
+	<script>
+		// 模态框
+		function modifyFn(btn,wrap,mod){
+			var oModifyBtn = document.getElementById(btn);
+			var oModalWarp = document.getElementById(wrap);
+			var oModal = document.getElementById(mod);
+			oModifyBtn.onclick = function () {
+				oModalWarp.style.display = 'block';
+			}
+			oModalWarp.onclick = function () {
+				oModalWarp.style.display = 'none';
+			}
+			oModal.onclick = function (e) {
+				window.event ? window.event.cancelBubble = true : e.stopPropagation();
+			}
+		}
+		modifyFn('modifyEmailBtn','modalEmailWarp','modalEmail');
+		modifyFn('modifyPwdBtn','modalPwdWarp','modalPwd');
+
+		// 密码验证
+		oBtn = document.getElementById('submitPassword');
+		oBtn.onclick = function(){
+			let data = {
+				old : '',
+				new : '',
+				reN : '',
+			};
+			data.old = document.getElementById('oldPassword').value;
+			data.new = document.getElementById('newPassword').value;
+			data.reN = document.getElementById('reNewPassword').value;
+
+			if( data.new !== data.reN ){
+				alert('两次密码不一致');
+			}else{
+				if( data.old.length<6 ||data.new.length<6 || data.reN.length<6 ||data.old.length>16 ||data.new.length>16 || data.reN.length<6  ){
+					alert('密码长度不能少于6位');
+				}else{
+					document.getElementById('modifyPwdForm').submit();
+				}
+			}
+		}
+	</script>
+</body>
+</html>

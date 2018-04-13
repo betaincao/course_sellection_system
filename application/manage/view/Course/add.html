@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+{include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:url('Course/lst')}">课程管理</a><span class="crumb-step">&gt;</span><span>新增课程</span></div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>课程编号：</th>
+                                    <td>
+                                        <input class="common-text required" id="c_num" placeholder="课程编号" name="c_num" size="50" value="" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>所属系部：</th>
+                                    <td><input name="c_major" value="网络工程" type="radio" />网络工程
+                                        <input name="c_major" value="软件工程" type="radio" />软件工程
+                                        <input name="c_major" value="计算机科学与技术" type="radio" />计算机科学与技术
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>所属年级：</th>
+                                    <td>
+                                        <input class="common-text required" id="c_grade" placeholder="例如：2015" name="c_grade" size="50" value="" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>课程名称：</th>
+                                <td>
+                                    <input class="common-text required" id="c_name" placeholder="课程名" name="c_name" size="50" value="" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>考核组织单位：</th>
+                                    <td>
+                                        <input name="c_check_address" value="院考" type="radio" />院考
+                                        <input name="c_check_address" value="校考" type="radio" />校考
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>学分：</th>
+                                    <td>
+                                        <input class="common-text required" id="c_score" placeholder="例如：4" name="c_score" size="50" value="" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>学时：</th>
+                                    <td>
+                                        <input class="common-text required" id="c_all_time" placeholder="例如：64" name="c_all_time" size="50" value="" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>理论学时：</th>
+                                    <td>
+                                        <input class="common-text required" id="c_theoretical_time" placeholder="例如：32" name="c_theoretical_time" size="50" value="" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>实验学时：</th>
+                                        <td>
+                                            <input class="common-text required" id="c_test_hours" placeholder="例如：32" name="c_test_hours" size="50" value="" type="text">
+                                        </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>开课学期：</th>
+                                    <td>
+                                        <input name="c_semester" value="1" type="radio" />1&nbsp;
+                                        <input name="c_semester" value="2" type="radio" />2  &nbsp;
+                                        <input name="c_semester" value="3" type="radio" />3  &nbsp;
+                                        <input name="c_semester" value="4" type="radio" />4 &nbsp; 
+                                        <input name="c_semester" value="5" type="radio" />5  &nbsp;
+                                        <input name="c_semester" value="6" type="radio" />6 &nbsp; 
+                                        <input name="c_semester" value="7" type="radio" />7  &nbsp;
+                                        <input name="c_semester" value="8" type="radio" />8 &nbsp;
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>周学时：</th>
+                                        <td>
+                                            <input class="common-text required" id="c_weeK_time" placeholder="周学时" name="c_week_time" size="50" value="" type="text">
+                                        </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>备注：</th>
+                                    <td>
+                                            <input class="common-text required" id="c_weeK_time" placeholder="备注" name="c_remarks" size="50" value="" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

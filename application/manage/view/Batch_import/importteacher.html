@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+{include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:url('BatchImport/index')}">批量导入</a><span class="crumb-step">&gt;</span><span>导入教师</span></div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                            <th><i class="require-red">*</i>文件上传：</th>
+                                <td>
+                                    <input id="p_path" type="file" name="file_stu">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>提示：</th>
+                                <td>
+                                    批量导入信息可能会有所卡顿，请耐心等待。上传文件格式为：***.xlsx
+                                </tr>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

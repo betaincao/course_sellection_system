@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算机学院网上选课系统后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+    {include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">分配课程</span></div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post" action="{:url('distribute/insertdata')}">
+                <div class="result-title">
+                    {$major}{$grade}级在第 <B><font color="red">{$course[0]['c_semester']}</font></B> 学期有以下<B><font color="red">{:count($course)}</font></B>门课程，请设置学生选课数量：
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th width="6%">课程编号</th>
+                            <th width="6%">所属专业</th>
+                            <th width="6%">所属年级</th>
+                            <th width="12%">课程名称</th>
+                            <th width="3%">考核组织单位</th>
+                            <th width="3%">学分</th>
+                            <th width="3%">学时</th>
+                            <th width="3%">理论学时</th>
+                            <th width="3%">实验学时</th>
+                            <th width="3%">开课学期</th>
+                            <th width="3%">周学时</th>
+                            <th width="3%">备注</th>
+                            <th width="6%">设置</th>
+                        </tr>
+                        {volist name="course" id="vo" empty="当前没有数据"}
+                        <tr>
+                            <td>{$vo.c_num}</td>
+                            <td >{$vo.c_major}</td>
+                            <td>{$vo.c_grade}</td>
+                            <td >{$vo.c_name}</td>
+                            <td >{$vo.c_check_address}</td>
+                            <td >{$vo.c_score}</td>
+                            <td >{$vo.c_all_time}</td>
+                            <td >{$vo.c_theoretical_time}</td>
+                            <td >{$vo.c_test_hours}</td>
+                            <td >{$vo.c_semester}</td>
+                            <td >{$vo.c_week_time}</td>
+                            <td >{$vo.c_remarks}</td>
+                            <td ><a onclick="return confirm('确定设置为整班选课？');" href = {:url('distribute/allchoose')}>整班选课</a></td>
+                        </tr>
+                        {/volist}
+                    </table>
+                </div>
+                <div class="result-title">
+                    <table class="result-tab" width="100%">
+                    <tr>
+                        <td>
+                            请输入除整班选课外，剩余课程中最少选课数量：<input  class="numRequired" name="lang">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <input name="c_major" value={$major} type="hidden">
+                            <input name="c_grade" value={$grade} type="hidden">
+                            <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                            <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

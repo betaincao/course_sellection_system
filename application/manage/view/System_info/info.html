@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算机学院网上选课系统后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+        {include file="Public/top" /}
+<div class="container clearfix">
+        {include file="Public/left" /}
+    <!--/sidebar-->
+        <div class="result-wrap">
+            <div class="result-title">
+                <h1>系统基本信息</h1>
+            </div>
+            <div class="result-content">
+                <ul class="sys-info-list">
+                    <li>
+                        <label class="res-lab">用户名</label><span class="res-info">admin</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">服务器时间</label><span class="res-info">{:date('Y-m-t H:i:s',time())}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">操作系统</label><span class="res-info">WINNT</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">服务器环境</label><span class="res-info">{$_SERVER["SERVER_SOFTWARE"]}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">PHP运行方式</label><span class="res-info">{:php_sapi_name()}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">系统版本号</label><span class="res-info">v-1.0</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">ThinkPHP版本</label><span class="res-info">{:THINK_VERSION}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">上传附件限制</label><span class="res-info">{:ini_get('upload_max_filesize')}</span>
+                    </li>
+
+                    <li>
+                        <label class="res-lab">当前IP</label><span class="res-info">{$_SERVER["REMOTE_ADDR"]}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-title">
+                <h1><a href = {:url('help')}>使用帮助</a></h1>
+            </div>
+            <div class="result-content">
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

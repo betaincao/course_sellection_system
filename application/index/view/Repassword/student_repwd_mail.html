@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>重置密码 - 计算机学院在线选课系统</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<!-- 重置样式 -->
+	<link href="__PUBLIC__/static/front/css/reset.css" rel="stylesheet">
+	<!-- 引入bootstrap CSS -->
+	<link href="__PUBLIC__/static/front/css/bootstrap.css" rel="stylesheet">
+	<!-- 引入bootstrap 图标 -->
+	<link href="__PUBLIC__/static/front/css/font.min.css" rel="stylesheet">
+	<!-- 核心CSS -->
+	<link href="__PUBLIC__/static/front/css/forget.css" rel="stylesheet">
+</head>
+<body>
+	<!-- 头部导航 -->
+    <div class="header">
+        <div class=".layout-logo">
+            <img src="__PUBLIC__/static/front/images/logo.png" alt="" class="layout-logo">
+        </div>
+        <div class="layout-user">
+            <p>计算机学院在线选课系统</p>
+        </div>
+    </div>
+
+	<!-- 核心内容 -->
+	<div class="wrap">
+	<div class="cont clearfix">
+			<form class="form active" id="student" method=post action="{:url('index/Repassword/student_repwd_mail')}">
+                <h2>
+					<i class="icon icon-lock"></i>
+					账号安全中心
+                </h2> 
+                <div class="input">
+                通过邮箱找回密码        
+                </div>
+                <br>
+                <div class="input">
+                <strong><h4>您的注册邮箱为&nbsp;&nbsp;<font color="red">{$mail}</font></h4></strong>
+                </div>
+                <br>
+                 <div class="input">
+                    <input type="text" name="captcha" class="pass-text-input" required="true" placeholder="请输入验证码">
+				</div>
+				<div class="input">
+					<!-- <img src="{:captcha_src()}" alt="captcha" /> -->
+					<img src="{:captcha_src()}"  onclick="this.src='{:captcha_src()}'">
+					<!-- <img id="img" src="{:captcha_img()}" onclick='this.src=this.src+"?"+Math.random()'  style="width: 200px;height:45px;" /> -->
+                </div>
+                <br>
+                <div class="input">
+                    <Button class="mainBtn submitBtn btn btn-success" >找回密码</Button>
+                </div>
+            </form>
+		<!-- 跳转按钮 -->
+		<a class="btn btn-info sm toIndex" href="{:url('Index/index')}">返回首页</a>
+		<a class="btn btn-warning sm toTop" href="javascript:history.go(-1)">返回上一页</a>
+	</div>
+	</div>
+	
+	<!-- 底部版权 -->
+	<div class="layout-copy">
+	    2017 &copy; 西安邮电大学
+	</div>
+</body>
+</html>

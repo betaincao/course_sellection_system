@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+{include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:url('BatchExport/index')}">批量导出</a><span class="crumb-step">&gt;</span><span>按专业导出学生信息</span></div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>专业全称：</th>
+                                <td>
+                                    <input class="common-text required" id="s_major" placeholder="例：网络工程" name="s_major" size="50" value="" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>年级：</th>
+                                    <td>
+                                        <input class="common-text required" id="s_grade" placeholder="例：2015" name="s_grade" size="50" value="" type="text">
+                                    </td>
+                                </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="导出" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

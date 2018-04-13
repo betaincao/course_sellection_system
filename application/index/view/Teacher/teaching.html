@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>教师系统 - 计算机学院在线选课系统</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<!-- 重置样式 -->
+	<link href="__PUBLIC__/static/front/css/reset.css" rel="stylesheet">
+	<!-- 引入bootstrap CSS -->
+	<link href="__PUBLIC__/static/front/css/bootstrap.css" rel="stylesheet">
+	<!-- 引入bootstrap 图标 -->
+	<link href="__PUBLIC__/static/front/css/font.min.css" rel="stylesheet">
+	<!-- 核心CSS -->
+	<link href="__PUBLIC__/static/front/css/studentMain.css" rel="stylesheet">
+</head>
+<body>
+	<!-- 头部导航 -->
+    <div class="header">
+        <div class=".layout-logo">
+            <img src="__PUBLIC__/static/front/images/logo.png" alt="" class="layout-logo">
+        </div>
+        <div class="layout-user">
+            <p class="user-out btn btn-info btn-sm"><a href="{:url('Login/logout')}">退出登录</a></p>
+        </div>
+    </div>
+
+	<!-- 核心内容 -->
+	<div class="wrap clearfix">
+		<div class="left-list">
+			<!-- 左侧头像 -->
+			<div class="list-img">
+				<a href=""><img src="__PUBLIC__/static/front/images/user-icon.png" alt="用户头像" title="用户头像"></a>
+			</div>
+			<!-- 左侧姓名 -->
+			<div class="list-name">
+				<span>{:session('name')}</span>
+			</div>
+			<!-- 左侧选项 -->
+			<div class="list-options">
+				<ul>
+					<a href="{:url('teacher/teaching')}">
+						<li class="active">
+							<span class="icon icon-user-md">&nbsp;</span>
+							所授课程
+						</li>
+					</a>
+					<a href="{:url('teacher/notice')}">
+						<li>
+							<span class="icon icon-bell-alt">&nbsp;</span>
+							系统通知
+						</li>
+					</a>
+					<a href="{:url('teacher/info')}">
+						<li>
+							<span class="icon icon-cog">&nbsp;</span>
+							账号管理
+						</li>
+					</a>
+				
+				</ul>
+			</div>
+		</div>
+		<div class="right-cont">
+			<!-- 右侧标题 -->
+			<div class="right-cont">
+					<!-- 右侧标题 -->
+					<div class="cont-title">
+						所授课程(点击查看学生名单)
+					</div>
+					<!-- 右侧主体 -->
+					<div class="cont-main clearfix">
+						{volist name="teachingCourse" id="vo"}
+							<div class="main-list">
+								<a href="{:url('studentList',['c_id'=>$vo.c_id])}">
+									<div><img src="__PUBLIC__/static/front/images/test-course.jpg"></div>
+									<span>{$vo.c_name}</span>
+								</a>
+							</div>
+						{/volist}
+					</div>
+				</div>
+		</div>
+	</div>
+	
+	<!-- 底部版权 -->
+	<div class="layout-copy">
+	    2017 &copy; 西安邮电大学
+	</div>
+</body>
+</html>

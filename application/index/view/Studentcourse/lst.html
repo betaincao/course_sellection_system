@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>课程列表 - 计算机学院在线选课系统</title>
+	{include file="Public/public" /}
+		<!-- 核心内容 -->
+		<div class="wrap clearfix">
+			<div class="left-list">
+				<!-- 左侧头像 -->
+				<div class="list-img">
+					<a href=""><img src="__PUBLIC__/static/front/images/user-icon.png" alt="用户头像" title="用户头像"></a>
+				</div>
+				<!-- 左侧姓名 -->
+				<div class="list-name">
+					<span>{:session('name')}</span>
+				</div>
+				<!-- 左侧选项 -->
+				<div class="list-options">
+					<ul>
+						<a href="{:url('Studentcourse/lst')}">
+							<li class="active">
+								<span class="icon icon-user-md">&nbsp;</span>
+								我的课程
+							</li>
+						</a>
+						<a href="{:url('Unselected/lst')}">
+							<li>
+								<span class="icon icon-align-justify">&nbsp;</span>
+								课程列表
+							</li>
+						</a>
+						<a href="{:url('Notice/index')}">
+							<li>
+								<span class="icon icon-bell-alt">&nbsp;</span>
+								系统通知
+							</li>
+						</a>
+						<a href="{:url('Studentinfo/index')}">
+							<li>
+								<span class="icon icon-cog">&nbsp;</span>
+								账号管理
+							</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="right-cont">
+				<!-- 右侧标题 -->
+				<div class="cont-title">
+					正在学习的课程
+					<a href ="{:url('history')}" class="historyBtnA">
+						<div class="historyBtn">历史课程</div>
+					</a>
+				</div>
+				<!-- 右侧主体 -->
+				<div class="cont-main clearfix">
+					{volist name="course" id="vo"}
+						<div class="main-list">
+							<a href="{:url('Studentcourse/details',['c_id'=>$vo.c_id])}">
+								<span>{$vo.c_name}</span>
+							</a>
+						</div>
+					{/volist}
+
+					<div class="main-add">
+						<a href="{:url('Unselected/lst')}"><span class="icon icon-plus-sign"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<!-- 底部版权 -->
+	<div class="layout-copy">
+	    2017 &copy; 西安邮电大学
+	</div>
+</body>
+</html>

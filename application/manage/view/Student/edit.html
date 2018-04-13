@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+{include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:url('Teacher/lst')}">课程管理</a><span class="crumb-step">&gt;</span><span>修改栏目</span></div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{$student.s_num}">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>学号：</th>
+                                    <td>
+                                        <input class="common-text required" id="s_num"  name="s_num" size="50" value="{$student.s_num}" type="text">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>姓名：</th>
+                                <td>
+                                    <input class="common-text required" id="name"  name="name" size="50" value="{$student.name}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>专业：</th>
+                                <td>
+                                    <input class="common-text required" id="s_major"  name="s_major" size="50" value="{$student.s_major}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>学生年级：</th>
+                                <td>
+                                    <input class="common-text required" id="s_grade"  name="s_grade" size="50" value="{$student.s_grade}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>学生班级：</th>
+                                <td>
+                                    <input class="common-text required" id="s_class"  name="s_class" size="50" value="{$student.s_class}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>学生年龄：</th>
+                                <td>
+                                    <input class="common-text required" id="s_age" placeholder="学生年龄" name="s_age" size="50" value="{$student.s_age}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="10%"><i class="require-red">*</i>个人邮箱：</th>
+                                <td>
+                                    <input class="common-text required" id="s_mail" placeholder="123456789@***.com" name="s_mail" size="50" value="{$student.s_mail}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                    <th width="10%"><i class="require-red">*</i>性别：</th>
+                                    <td><input name="s_sex" value="男" type="radio" />男
+                                        <input name="s_sex" value="女" type="radio" />女
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>

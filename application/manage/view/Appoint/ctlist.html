@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算机学院网上选课系统后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+    {include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">课程管理</span></div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="{:url('course/add')}"><i class="icon-font"></i>新增课程</a>
+                        <a href="{:url('student/searchbyname')}"><i class="icon-font">&#xe004;</i>查找</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th width="6%">课程编号</th>
+                            <th width="6%">所属专业</th>
+                            <th width="6%">所属年级</th>
+                            <th width="12%">课程名称</th>
+                            <th width="4%">考核组织单位</th>
+                            <th width="4%">学分</th>
+                            <th width="4%">学时</th>
+                            <th width="4%">理论学时</th>
+                            <th width="4%">实验学时</th>
+                            <th width="4%">开课学期</th>
+                            <th width="4%">周学时</th>
+                            <th width="6%">备注</th>
+                            <th width="15%">操作</th>
+                        </tr>
+                        {volist name="course" id="vo"}
+                        <tr>
+                            <td>{$vo.c_num}</td>
+                            <td >{$vo.c_major}</td>
+                            <td>{$vo.c_grade}</td>
+                            <td >{$vo.c_name}</td>
+                            <td >{$vo.c_check_address}</td>
+                            <td >{$vo.c_score}</td>
+                            <td >{$vo.c_all_time}</td>
+                            <td >{$vo.c_theoretical_time}</td>
+                            <td >{$vo.c_test_hours}</td>
+                            <td >{$vo.c_semester}</td>
+                            <td >{$vo.c_week_time}</td>
+                            <td >{$vo.c_remarks}</td>
+                            <td>
+                                <a class="link-update" href="{:url('edit',array('c_id'=>$vo.c_id))}"><i class="icon-font">&#xe002;</i>修改</a>&nbsp;
+                                <a class="link-del" onclick="return confirm('你确定要删除该课程吗？');" href="{:url('del',array('c_id'=>$vo.c_id))}"><i class="icon-font">&#xe019;</i>删除</a>
+                            </td>
+                        </tr>
+                        {/volist}
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>
