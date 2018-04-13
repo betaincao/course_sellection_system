@@ -17,9 +17,10 @@ class Teacher extends Important{
             $this->assign('teachingCourse',$course);
             return $this->fetch();
         }else{
-            $this->error('暂时没有您的课程');
+            $course=array();
+            $this->assign('teachingCourse',$course);
+            return $this->fetch();
         }
-die;
     }
     public function notice(){
         $notice = \think\Db::table('system_notice')->order('n_time desc')->find();

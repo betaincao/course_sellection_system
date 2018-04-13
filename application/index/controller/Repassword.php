@@ -8,33 +8,68 @@ use think\Controller;
 use PHPMailer\SendEmail;
 class Repassword extends Controller{
 	/**
-	 * 学生找回密码
+	 * 找回密码
 	 */
-	public function student_repwd(){
+	public function repassword(){
+		$type = input('type');
 		if(request()->isPost()){
-			$studentnum = input('studentnum');
+			$num = input('num');
 			$captcha = input('captcha');
 			if(captcha_check($captcha)){
-				if(!empty($studentnum)){
-					$data = \think\Db::name("student")->field('s_num,name,s_mail')->where('s_num',$studentnum)->find();
-					if($data){
-						$data = serialize($data);
-						\think\Session::set('data',$data);
-						return $this->redirect('student_repwd_mail',302);
-						
+				if(isset($num)){
+					switch($type){
+					case 1:
+					//学生忘记密码
+						$data = \think\Db::name("student")->field('s_num,name,s_mail')->where('s_num',$num)->find();
+						if($data){
+							if(empty($data['s_mail'])){
+								$this->success('您没有修改过密码，请使用初始密码登录','index/index');
+							}else{
+								$data = serialize($data);
+								\think\Session::set('data',$data);
+								return $this->redirect('repassword_mail',['type' => 1],302);
+							}
+						}else{
+							$this->error('用户不存在，请检查你的账号。');
+						}
+						break;
+					case 2:
+					//教师忘记密码
+					$data1 = \think\Db::name("teacher")->field('t_num,name,t_mail')->where('t_num',$num)->find();
+					if($data1){
+						$data = [
+							's_num' => $data1['t_num'],
+							'name' =>$data1['name'],
+							's_mail' =>$data1['t_mail']
+						];
+						if(empty($data['s_mail'])){
+							$this->success('您没有修改过密码，请使用初始密码登录','index/index');
+						}else{
+							$data = serialize($data);
+							\think\Session::set('data',$data);
+							return $this->redirect('repassword_mail',['type' => 2],302);
+						}
 					}else{
 						$this->error('用户不存在，请检查你的账号。');
 					}
-
+					break;
+					default:
+						$this->error('出错啦');
+					}
 				}else{
 					$this->error('输入格式有误！请重新输入');
 				}
 			}else{
 				$this->error('验证码不正确！');
 			}
+		}else{
+			return $this->fetch();
 		}
-		return $this->fetch();
+
 	}
+	/**
+	 * 生成随机token
+	 */
 	function genToken( $len = 32, $md5 = true ) {  
 		# Seed random number generator  
 		   # Only needed for PHP versions prior to 4.2  
@@ -68,14 +103,15 @@ class Repassword extends Controller{
 	/**
 	 * 学生找回密码验证
 	 */
-	public function student_repwd_mail(){
+	public function repassword_mail(){
 		$data = unserialize(\think\Session::get('data'));
+		$type = input('type');
 		if(request()->isPost()){
 			$captcha = input('captcha');
 			if(captcha_check($captcha)){
 				\think\Session::delete('data');
 				$token = $this->genToken();
-				$url = 'http://222.24.63.98/index/repassword/do_repassword?token=' . $token . '&s_num=' . $data['s_num'] . '&client_ip='. $_SERVER['REMOTE_ADDR'];
+				$url = 'http://222.24.63.98/index/repassword/do_repassword?token=' . $token . '&num=' . $data['s_num'] . '&client_ip='. $_SERVER['REMOTE_ADDR'];
 				$t = time()+600;//时间戳，判断过期
 				$time = date("Y-m-d H:i:s",strtotime("+10 minute"));
 				$year = date("Y");
@@ -88,6 +124,7 @@ class Repassword extends Controller{
 					's_num' => $data['s_num'],
 					'token' => $token,
 					'client_ip' => $_SERVER['REMOTE_ADDR'],
+					'type' => $type,
 					'create_time' => $t
 				];
 				$insertinfo = \think\Db::name("repassword")->insert($info,$replace = true);
@@ -110,7 +147,7 @@ class Repassword extends Controller{
 	//忘记密码，修改密码动作
 	public function do_repassword(){
 			$token = input('token');
-			$s_num = input('s_num');
+			$s_num = input('num');
 			$client_ip = $_SERVER['REMOTE_ADDR'];
 			if(isset($token)&&isset($s_num)&&isset($client_ip)){
 				$data = \think\Db::name("repassword")->where('s_num',$s_num)->where('token',$token)->find();
@@ -122,7 +159,17 @@ class Repassword extends Controller{
 							$pwd = md5(input('newPassword'));
 							$captcha = input('captcha');
 							if(captcha_check($captcha)){
-								$result = \think\Db::name("student")->where('s_num',$data['s_num'])->update(['password' => $pwd]);
+								switch($data['type']){
+									case 1:
+									$result = \think\Db::name("student")->where('s_num',$data['s_num'])->update(['password' => $pwd]);
+									break;
+									case 2:
+									$result = \think\Db::name("teacher")->where('t_num',$data['s_num'])->update(['password' => $pwd]);
+									break;
+									default:
+									$this->error('出错啦');
+								}
+								
 								if($result){
 									return $this->success('修改密码成功,请使用您刚修改的密码登录系统','index/index');
 								}else{

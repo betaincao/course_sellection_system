@@ -31,21 +31,27 @@ class Studentinfo extends Important{
         }
     }
     public function changepwd(){
-        if(request()->isPost()){
-            $pwd = md5(input('password'));
-            $newPassword = md5(input('newPassword'));
-            $s_num = session('id');
-            $password = \think\Db::name("student")->field('password')->where('s_num',$s_num)->find();
-            if($pwd == $password['password']){
-                $db= \think\Db::name('student')->where('s_num',$s_num)->update(['password' => $newPassword]);
-                if($db){
-                    $this->success('修改成功,系统将退出，请重新登录。','login/logout');
+        $s_num = session('id');
+        $data = \think\Db::name("student")->field('s_mail')->where('s_num',$s_num)->find();
+        if(empty($data['s_mail'])){
+            $this->error('修改失败，请先修改您的邮箱信息');
+        }else{
+            if(request()->isPost()){
+                $pwd = md5(input('password'));
+                $newPassword = md5(input('newPassword'));
+                $password = \think\Db::name("student")->field('password')->where('s_num',$s_num)->find();
+                if($pwd == $password['password']){
+                    $db= \think\Db::name('student')->where('s_num',$s_num)->update(['password' => $newPassword]);
+                    if($db){
+                        $this->success('修改成功,系统将退出，请重新登录。','login/logout');
+                    }else{
+                        $this->error('修改失败');
+                    }
                 }else{
-                    $this->error('修改失败');
+                    $this->error('您输入的密码不正确');
                 }
-            }else{
-                $this->error('您输入的密码不正确');
             }
         }
+        
     }
 }
