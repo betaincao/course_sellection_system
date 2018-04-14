@@ -52,4 +52,54 @@ class Teacher extends Important{
         $this->assign('studentList',$data);
         return $this->fetch();
     }
+    /**
+     * 教师修改邮箱模块
+     */
+    public function changemail(){
+        if(request()->isPost()){
+            $pwd = md5(input('password'));
+            
+            $mail = input('email');
+            $s_num = session('id');
+            $password = \think\Db::name("teacher")->field('password')->where('t_num',$s_num)->find();
+            if($pwd == $password['password']){
+                $db= \think\Db::name('teacher')->where('t_num',$s_num)->update(['t_mail' => $mail]);
+                if($db){
+                    $this->redirect('info');
+                }else{
+                    $this->error('修改失败');
+                }
+            }else{
+                $this->error('您输入的密码不正确');
+            }
+        }
+    }
+    /**
+     * 教师修改密码模块
+     *
+     */
+    public function changepwd(){
+        $s_num = session('id');
+        $data = \think\Db::name("teacher")->field('t_mail')->where('t_num',$s_num)->find();
+        if(empty($data['t_mail'])){
+            $this->error('修改失败，请先修改您的邮箱信息');
+        }else{
+            if(request()->isPost()){
+                $pwd = md5(input('password'));
+                $newPassword = md5(input('newPassword'));
+                $password = \think\Db::name("teacher")->field('password')->where('t_num',$s_num)->find();
+                if($pwd == $password['password']){
+                    $db= \think\Db::name('teacher')->where('t_num',$s_num)->update(['password' => $newPassword]);
+                    if($db){
+                        $this->success('修改成功,系统将退出，请重新登录。','login/logout');
+                    }else{
+                        $this->error('修改失败');
+                    }
+                }else{
+                    $this->error('您输入的密码不正确');
+                }
+            }
+        }
+        
+    }
 }

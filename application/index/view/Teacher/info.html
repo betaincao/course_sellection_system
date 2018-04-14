@@ -15,7 +15,7 @@
 	<!-- 核心CSS -->
 	<link href="__PUBLIC__/static/front/css/studentSet.css" rel="stylesheet">
 	<style>
-		#modalWarp{
+		#modalEmailWarp,#modalPwdWarp{
 			display: none;
 			width: 100%;
 			height: 100%;
@@ -23,7 +23,7 @@
 			position: absolute;
 			top: 0;
 		}
-		#modal{
+		#modalEmail,#modalPwd{
 			width: 300px;
 			height: 220px;
 			background: white;
@@ -34,14 +34,17 @@
 			top: 0;bottom: 0;
 			margin: auto;
 		}
-		#modal h2{
+		#modalPwd{
+			height: 260px;
+		}
+		#modalEmail h2,#modalPwd h2{
 			width: 100%;
 			line-height: 30px;
 			font-size: 20px;
 
 			text-align: center;
 		}
-		#modal input{
+		#modalEmail input,#modalPwd input{
 			display: block;
 			width: 80%;
 			padding: 5px;
@@ -120,18 +123,18 @@
                         <div class="list-cont">{$teacher['t_school']}</div>
                 </div>
                 <div class="main-list clearfix">
-                            <div class="list-opt">系部：</div>
-                            <div class="list-cont">{$teacher['t_department']}</div>
-                        </div>
+					<div class="list-opt">系部：</div>
+					<div class="list-cont">{$teacher['t_department']}</div>
+				</div>
 				<div class="main-list clearfix">
 					<div class="list-opt">邮箱：</div>
 					<div class="list-cont">{$teacher['t_mail']}</div>
-					<button class="btn btn-danger btn-sm" id="modifyBtn">修改邮箱</button>
+					<button class="btn btn-danger btn-sm" id="modifyEmailBtn">修改邮箱</button>
 				</div>
 				<div class="main-list clearfix">
 					<div class="list-opt">密码：</div>
 					<div class="list-cont">******</div>
-					<a class="btn btn-danger btn-sm" href="">修改密码</a>
+					<a class="btn btn-danger btn-sm" id="modifyPwdBtn">修改密码</a>
 				</div>
 			</div>
 		</div>
@@ -142,30 +145,71 @@
 	    2017 &copy; 西安邮电大学
 	</div>
 
-	<div id="modalWarp">
-		<div id="modal">
-			<form action="{:url('changemail')}" method="POST">
-				<h2>修改邮箱</h2>
-				<input type="password" placeholder="请输入您的密码" name="password" required="" maxlength="6" minlength="6">
-				<input type="email" placeholder="请输入新的邮箱地址" name="email">
-				<input type="submit" class="btn btn-danger" value="确认修改">
-			</form>
+	<!--修改邮箱 -->
+	<div id="modalEmailWarp">
+			<div id="modalEmail">
+				<form action="{:url('changemail')}" method="POST">
+					<h2>修改邮箱</h2>
+					<input type="password" placeholder="请输入您的密码" name="password" required="" maxlength="16" minlength="6">
+					<input type="email" placeholder="请输入新的邮箱地址" name="email">
+					<input type="submit" class="btn btn-danger" value="确认修改">
+				</form>
+			</div>
 		</div>
-	</div>
-
-	<script>
-		var oModifyBtn = document.getElementById('modifyBtn');
-		var oModalWarp = document.getElementById('modalWarp');
-		var oModal = document.getElementById('modal');
-		oModifyBtn.onclick = function () {
-			oModalWarp.style.display = 'block';
-		}
-		oModalWarp.onclick = function () {
-			oModalWarp.style.display = 'none';
-		}
-		oModal.onclick = function (e) {
-			window.event ? window.event.cancelBubble = true : e.stopPropagation();
-		}
-	</script>
+		<!--修改密码-->
+		<div id="modalPwdWarp">
+			<div id="modalPwd">
+				<form action="{:url('changepwd')}" method="POST" id="modifyPwdForm">
+					<h2>修改密码</h2>
+					<input type="password" placeholder="请输入当前密码" name="password" id="oldPassword" required maxlength="16" minlength="6">
+					<input type="password" placeholder="请输入输入新密码" name="newPassword" id="newPassword" required maxlength="16" minlength="6">
+					<input type="password" placeholder="请输入重复新密码" name="renewPassword" id="reNewPassword" required maxlength="16" minlength="6">
+					<input type="button" class="btn btn-danger" id="submitPassword" value="确认修改">
+				</form>
+			</div>
+		</div>
+	
+		<script>
+			// 模态框
+			function modifyFn(btn,wrap,mod){
+				var oModifyBtn = document.getElementById(btn);
+				var oModalWarp = document.getElementById(wrap);
+				var oModal = document.getElementById(mod);
+				oModifyBtn.onclick = function () {
+					oModalWarp.style.display = 'block';
+				}
+				oModalWarp.onclick = function () {
+					oModalWarp.style.display = 'none';
+				}
+				oModal.onclick = function (e) {
+					window.event ? window.event.cancelBubble = true : e.stopPropagation();
+				}
+			}
+			modifyFn('modifyEmailBtn','modalEmailWarp','modalEmail');
+			modifyFn('modifyPwdBtn','modalPwdWarp','modalPwd');
+	
+			// 密码验证
+			oBtn = document.getElementById('submitPassword');
+			oBtn.onclick = function(){
+				let data = {
+					old : '',
+					new : '',
+					reN : '',
+				};
+				data.old = document.getElementById('oldPassword').value;
+				data.new = document.getElementById('newPassword').value;
+				data.reN = document.getElementById('reNewPassword').value;
+	
+				if( data.new !== data.reN ){
+					alert('两次密码不一致');
+				}else{
+					if( data.old.length<6 ||data.new.length<6 || data.reN.length<6 ||data.old.length>16 ||data.new.length>16 || data.reN.length<6  ){
+						alert('密码长度不能少于6位');
+					}else{
+						document.getElementById('modifyPwdForm').submit();
+					}
+				}
+			}
+		</script>
 </body>
 </html>
