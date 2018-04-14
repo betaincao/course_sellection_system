@@ -18,6 +18,7 @@ class Teacher extends Important{
             return $this->fetch();
         }else{
             $course=array();
+            $this->assign('empty','<span class="empty"><h4><br>暂时没有数据，请联系管理员</h4></span>');
             $this->assign('teachingCourse',$course);
             return $this->fetch();
         }
@@ -30,7 +31,7 @@ class Teacher extends Important{
     }
     public function info(){
         $t_num = session('id');
-        $data = \think\Db::name("teacher")->where('t_num',$t_num)->find();
+        $data = \think\Db::name("teacher")->field('t_num,name,t_department,t_school,t_sex,t_mail')->where('t_num',$t_num)->find();
         $this->assign('teacher',$data);
         return $this->fetch();
     }

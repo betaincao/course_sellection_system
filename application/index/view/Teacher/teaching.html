@@ -71,7 +71,7 @@
 					</div>
 					<!-- 右侧主体 -->
 					<div class="cont-main clearfix">
-						{volist name="teachingCourse" id="vo"}
+						{volist name="teachingCourse" id="vo" empty="$empty"}
 							<div class="main-list">
 								<a href="{:url('studentList',['c_id'=>$vo.c_id])}">
 									<div><img src="__PUBLIC__/static/front/images/test-course.jpg"></div>

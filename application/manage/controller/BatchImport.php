@@ -1,6 +1,6 @@
 <?php
 /**
-*批量导出操作
+*批量导入操作
 */
 namespace app\manage\controller;
 use think\Controller;
@@ -107,7 +107,7 @@ class BatchImport extends Base{
                     $data[$k]['t_sex'] = $v[2];
                     $data[$k]['t_school'] = $v[3];
                     $data[$k]['t_department'] = $v[4];
-                    $data[$k]['password'] = md5('111111');
+                    $data[$k]['password'] = md5($v[0]);
                     $data[$k]['t_mail'] = '';
             }
             //插入的操作最好放在循环外面
