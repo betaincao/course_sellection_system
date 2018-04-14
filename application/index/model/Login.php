@@ -16,7 +16,11 @@ class Login extends Model
     		}else{
     			return 2;
     		}
-
+/**
+ * 
+ * 这里需要修改，不能三个角色的session放在一起，无法判断登录状态。
+ * 
+ */
     	}else{
     		return 3;
     	}
