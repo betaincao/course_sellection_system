@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => false,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -156,7 +156,7 @@ return [
     // 错误显示信息,非调试模式有效
     'error_message'          => '页面错误！请稍后再试～',
     // 显示错误信息
-    'show_error_msg'         => true,
+    'show_error_msg'         => false,
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
 
@@ -246,8 +246,8 @@ return [
     ],
     'captcha'  => [
         // 验证码字符集合
-        'codeSet'  => '12345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY', 
-        //'codeSet'  => '1', 
+        //'codeSet'  => '12345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY', 
+        'codeSet'  => '1', 
         // 验证码字体大小(px)
         'fontSize' => 18, 
         // 是否画混淆曲线
@@ -257,7 +257,7 @@ return [
         // 验证码图片宽度
         'imageW'   => 175, 
         // 验证码位数
-        'length'   => 4, 
+        'length'   => 1, 
         // 验证成功后是否重置        
         'reset'    => true
     ],
