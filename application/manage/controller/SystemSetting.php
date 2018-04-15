@@ -17,7 +17,7 @@ class SystemSetting extends Base{
         //$name = db('admin')->where('id',$id)->field('username')->find();
         $name = db('admin')->where('id',$id)->find();
         //var_dump(session('name'));
-        if($name['name'] === session('name'))
+        if($name['name'] === session('a_name'))
         {
             $this->assign('name',$name);
             return $this->fetch();
