@@ -10,8 +10,8 @@ class Login extends Model
         //var_dump($admin);die();
     	if($admin){
     		if($admin['password']==md5($password)){
-    			\think\Session::set('id',$admin['id']);
-    			\think\Session::set('name',$admin['name']);
+    			\think\Session::set('a_id',$admin['id']);
+    			\think\Session::set('a_name',$admin['name']);
     			return 1;
     		}else{
     			return 2;
