@@ -3,8 +3,7 @@ namespace app\index\model;
 
 use think\Model;
 
-class Login extends Model
-{
+class Login extends Model{
     public function login($identity,$username,$field,$password){
         $data= \think\Db::name("$identity")->where($field,'=',$username)->find();
     	if($data){
@@ -24,6 +23,9 @@ class Login extends Model
     	}else{
     		return 3;
     	}
-    }
+	}
+	public function teacher(){
+		
+	}
 }
 	
