@@ -4,9 +4,9 @@
  */
 namespace app\index\controller;
 use think\Controller;
-class Teacher extends Important{
+class Teacher extends ImportantTeacher{
     public function teaching(){
-        $t_num = session('id');
+        $t_num = session('t_id');
         $res = \think\Db::name("ct")->limit(5)->field('id')->where('t_num',$t_num)->select();
         $c_id = array();
         if($res){
@@ -30,7 +30,7 @@ class Teacher extends Important{
         return $this->fetch();
     }
     public function info(){
-        $t_num = session('id');
+        $t_num = session('t_id');
         $data = \think\Db::name("teacher")->field('t_num,name,t_department,t_school,t_sex,t_mail')->where('t_num',$t_num)->find();
         $this->assign('teacher',$data);
         return $this->fetch();
@@ -60,7 +60,7 @@ class Teacher extends Important{
             $pwd = md5(input('password'));
             
             $mail = input('email');
-            $s_num = session('id');
+            $s_num = session('t_id');
             $password = \think\Db::name("teacher")->field('password')->where('t_num',$s_num)->find();
             if($pwd == $password['password']){
                 $db= \think\Db::name('teacher')->where('t_num',$s_num)->update(['t_mail' => $mail]);
@@ -79,7 +79,7 @@ class Teacher extends Important{
      *
      */
     public function changepwd(){
-        $s_num = session('id');
+        $s_num = session('t_id');
         $data = \think\Db::name("teacher")->field('t_mail')->where('t_num',$s_num)->find();
         if(empty($data['t_mail'])){
             $this->error('修改失败，请先修改您的邮箱信息');

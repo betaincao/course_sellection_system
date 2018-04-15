@@ -20,9 +20,7 @@ class Login extends Controller{
         if(captcha_check($captcha)){
             if(!empty($student)){
                 $login=new Log;
-                $identity = 'student';
-                $field = 's_num';
-                $status=$login->login($identity,$student,$field,$password);  
+                $status=$login->studentLoginModel($student,$password);  
                 if($status==1){
                     //return $this->success('登录成功，正在跳转！','/index/studentcourse/lst');
                     $this->redirect('/index/studentcourse/lst');
@@ -49,9 +47,7 @@ class Login extends Controller{
         if(captcha_check($captcha)){
             if(!empty($teacher)){
                 $login=new Log;
-                $identity = 'teacher';
-                $field = 't_num';
-                $status=$login->login($identity,$teacher,$field,$password);  
+                $status=$login->teacherLoginModel($teacher,$password);  
                 if($status==1){
                     return $this->redirect('/index/Teacher/teaching');
                 }elseif($status==2){
@@ -77,9 +73,7 @@ class Login extends Controller{
         if(captcha_check($captcha)){
             if(!empty($admin)){
                 $login=new Log;
-                $identity = 'admin';
-                $field = 'name';
-                $status=$login->login($identity,$admin,$field,$password);  
+                $status=$login->adminLoginModel($admin,$password);  
                 if($status==1){
                     return $this->redirect('manage/index/home');
                 }elseif($status==2){
