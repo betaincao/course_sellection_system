@@ -41,7 +41,7 @@ class Choose extends Base{
             $data['grade'] = $grade;
             $data['c_name'] = $c_name;
             $data['length'] = $length;
-            var_dump($data);die;
+            //var_dump($data);die;
             $this->assign('data',$data);
             $this->assign('studentinfo',$studentinfo);
             return $this->fetch();

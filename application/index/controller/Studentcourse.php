@@ -35,9 +35,11 @@ class Studentcourse extends Important{
         $m_id = $data2['m_id']; 
         $c_id = input('c_id');
         $id = $s_num . $c_id;
-        $db=\think\Db::table("system_"."$m_id"."_course")->where('id',$id)->update(['status'=>0]);
+        $db=\think\Db::table("system_"."$m_id"."_course")->where('id',$id)->where('all','neq','1')->update(['status'=>0]);
         if($db){
             return $this->redirect('lst');
+        }else{
+            $this->error('该课程是限选课，不能退选','lst');
         }
     }
     public function history(){
