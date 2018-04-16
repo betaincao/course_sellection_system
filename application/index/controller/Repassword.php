@@ -116,7 +116,7 @@ class Repassword extends Controller{
 				$time = date("Y-m-d H:i:s",strtotime("+10 minute"));
 				$year = date("Y");
 				$title = "【计算机学院】找回您的账户密码";//邮件标题
-				$message = "<html>亲爱的{$data['name']}：您好！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您收到这封这封电子邮件是因为您申请了一个新的选课系统登录密码。假如这不是您本人所申请, 请不用理会这封电子邮件, 但是如果您持续收到这类的信件骚扰, 请您尽快联络管理员。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要使用新的密码, 请使用以下链接启用密码。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<url>{$url}</url><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(如果无法点击该URL链接地址，请将它复制并粘帖到“您申请忘记密码功能的浏览器”的地址输入框，然后单击回车即可。)<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意:请您在收到邮件10分钟内({$time}前)使用，否则该链接将会失效。<br><br>
+				$message = "<html>亲爱的{$data['name']}：您好！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您收到这封这封电子邮件是因为您申请了一个新的选课系统登录密码。假如这不是您本人所申请, 请不用理会这封电子邮件, 但是如果您持续收到这类的信件骚扰, 请您尽快联络管理员。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要使用新的密码, 请使用以下链接启用密码。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='{$url}'>{$url}</a><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(如果无法点击该URL链接地址，请将它复制并粘帖到“您申请忘记密码功能的浏览器”的地址输入框，然后单击回车即可。)<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意:请您在收到邮件10分钟内({$time}前)使用，否则该链接将会失效。<br><br>
 				<center>{$year}  &copy;  西安邮电大学计算机学院</center></html>";//邮件内容
 				$address = $data['s_mail'];//收件人
 				$result = SendEmail::SendEmail($title,$message,$address);
