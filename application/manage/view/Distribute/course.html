@@ -52,7 +52,7 @@
                             <td >{$vo.c_semester}</td>
                             <td >{$vo.c_week_time}</td>
                             <td >{$vo.c_remarks}</td>
-                            <td ><a onclick="return confirm('确定设置为整班选课？');" href = {:url('distribute/allchoose')}>整班选课</a></td>
+                            <td ><a onclick="return confirm('确定设置为整班选课？');" href = {:url('distribute/allchoose',array('c_id'=>$vo.c_id))}>整班选课</a></td>
                         </tr>
                         {/volist}
                     </table>

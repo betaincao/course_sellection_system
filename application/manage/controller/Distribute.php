@@ -52,8 +52,8 @@ class Distribute extends Base{
             }
             $course = \think\Db::name('course')->where('c_major',$major)->where('c_grade',$grade)->where('c_semester',$semester)->select();
             $student = \think\Db::name('student')->field('s_num')->where('s_major',$major)->where('s_grade',$grade)->select();
-            $major = \think\Db::name('major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->select();
-            $m_id = $major['0']['m_id'];
+            $major = \think\Db::name('major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
+            $m_id = $major['m_id'];
             $length1 = count($student);
             $length2 = count($course);
             for($i=0;$i<$length2;$i++){
@@ -63,6 +63,7 @@ class Distribute extends Base{
                         's_num'       =>$student["$j"]['s_num'],
                         'c_id'        =>$course["$i"]['c_id'],
                         'lang'        =>("("."$length2".","."$lang".")"),
+                        'all'         =>0,
                         'status'      =>0,
                         'create_time' =>date("Y-m-d"),
                     ];
@@ -78,6 +79,24 @@ class Distribute extends Base{
      * 整班选课
      */
     public function allchoose(){
-        echo "已开发，未测试。暂未开通";
+
+        $c_id=input('c_id');
+        $course = \think\Db::name('course')->field('c_grade,c_major')->where('c_id',$c_id)->find();
+        $student = \think\Db::name('student')->field('s_num')->where('s_major',$course['c_major'])->where('s_grade',$course['c_grade'])->select();
+        $m_id = \think\Db::name('major')->field('m_id')->where('major_name',$course['c_major'])->where('major_grade',$course['c_grade'])->find();
+        $length = count($student);
+        for($i=0;$i<$length;$i++){
+            $data = [
+                'id'          =>$student[$i]['s_num'] . $c_id,
+                's_num'       =>$student["$i"]['s_num'],
+                'c_id'        =>$c_id,
+                'lang'        =>'',
+                'all'         =>1,
+                'status'      =>1,
+                'create_time' =>date("Y-m-d"),
+            ];
+            $db= \think\Db::name($m_id['m_id'] .  "_course")->insert($data,$replace=true);
+        }
+        $this->success("分配成功！","distribute/index");
     }
 }
