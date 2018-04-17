@@ -6,6 +6,40 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
     <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+    <style>
+        .result-content{
+            width: 700px;
+            height: 450px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .result-content h2{
+            width: 50%;
+            margin: 20px auto;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: 300;
+            color: #333;
+            border-bottom: 1px dashed #ccc;
+        }
+        .result-content .item{
+            text-align: center;
+            padding: 20px;
+            line-height: 30px;
+        }
+        .result-content .item span{
+            font-size: 18px;
+            padding: 10px 15px;
+        }
+        [type=reset]{
+            margin-left: 18px;
+        }
+        [type=submit]{
+            width: 212px;
+            margin-left: 27px;
+        }
+    </style>
 </head>
 <body>
         {include file="Public/top" /}
@@ -14,7 +48,21 @@
     <!--/sidebar-->
         <div class="result-wrap">
             <div class="result-content">
-                这里写设置选课时间，前端嵌入时间选择器
+                <form action="">
+                    <h2>设置选课时间</h2>
+                    <div class="item">
+                        <span>开始时间：</span>
+                        <input type="datetime-local" name="beginTime" value="">
+                    </div>
+                    <div class="item">
+                        <span>结束时间：</span>
+                        <input type="datetime-local" name="endTime" value="">
+                    </div>
+                    <div class="item">
+                        <input type="reset" value="重新输入" class="btn btn-warning">
+                        <input type="submit" value="立即设置" class="btn btn-success">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
