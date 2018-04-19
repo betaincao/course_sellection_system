@@ -4,8 +4,9 @@ use think\Controller;
 class Teacher extends Base{
     //展示数据库中教师的信息
     public function lst(){
-        $teacher = \think\Db::table('system_teacher')->order('t_num desc')->select();
-        //dump($course);die();
+        $teacher = \think\Db::table('system_teacher')->order('t_num asc')->select();
+        $length = count($teacher);
+        $this->assign('sum',$length);
         $this->assign('teacher',$teacher);
         return $this->fetch();
         //return json_encode($course);

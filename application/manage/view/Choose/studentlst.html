@@ -24,16 +24,22 @@
                                 共有&nbsp;<B><font color="red">{$data.length}</font></B>&nbsp;人选择&nbsp;<B>{$data.major}</B>&nbsp;&nbsp;专业&nbsp;&nbsp;<B>{$data.grade}</B>&nbsp;&nbsp;级&nbsp;&nbsp;<B>{$data.c_name}</B>&nbsp;课程
                             </div>
                         </div>
-                <div class="result-content">
-                            {volist name="studentinfo" id="vo"}
                         <div class="result-content">
-                            <ul class="main-li">
-                                    <li>&nbsp;&nbsp;{$vo.name}</li>
-                                    <li>&nbsp;&nbsp;{$vo.s_num}</li>
-                                    <li>&nbsp;&nbsp;{$vo.s_class}</li>
-                                </ul>
-                            {/volist}
-                        </div>
+                                <table class="result-tab" width="100%">
+                                    <tr>
+                                        <th width="6%">姓名</th>
+                                        <th width="6%">学号</th>
+                                        <th width="6%">班级</th>
+                                    </tr>
+                                    {volist name="studentinfo" id="vo"}
+                                    <tr>
+                                        <td>{$vo.name}</td>
+                                        <td >{$vo.s_num}</td>
+                                        <td>{$vo.s_class}</td>
+                                    </tr>
+                                    {/volist}
+                                </table>
+                            </div>
                 </div>
             </form>
         </div>
