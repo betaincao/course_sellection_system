@@ -8,9 +8,9 @@ class Studentcourse extends Important{
     public function lst(){
         $s_num = session('id');
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
-        $major = $data1['s_major'];
+        $major = preg_replace('/\(.*?\)/', '', $data1['s_major']);
         $grade = $data1['s_grade'];
-        $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
+        $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name','like',$major)->where('major_grade',$grade)->find();
         $m_id = $data2['m_id']; 
         $data3 = \think\Db::table("system_"."$m_id"."_course")->field('c_id')->where('s_num',$s_num)->where('status',1)->select();
         $length = count($data3);
@@ -45,7 +45,7 @@ class Studentcourse extends Important{
     public function history(){
         $s_num = session('id');
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
-        $major = $data1['s_major'];
+        $major = preg_replace('/\(.*?\)/', '', $data1['s_major']);
         $grade = $data1['s_grade'];
         $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
         $m_id = $data2['m_id']; 
@@ -54,7 +54,7 @@ class Studentcourse extends Important{
         $c_id = array_map('array_shift', $data3);
         //$data4 = \think\Db::name("course")->field('c_name,c_id')->where('c_id',"in",$c_id)->select();
         $data4 = \think\Db::name("course")->where('c_id',"in",$c_id)->select();
-        var_dump($data4);die;
+        //var_dump($data4);die;
         $this->assign('course',$data4);
         return $this->fetch();
     }

@@ -130,7 +130,7 @@ class Repassword extends Controller{
 				$insertinfo = \think\Db::name("repassword")->insert($info,$replace = true);
 				if($result){
 					//发送成功的处理逻辑
-					$this->success('您的申请已提交成功，请查看您的邮箱。','Index/index');
+					$this->success('您的申请已提交成功，请查看您的邮箱（如您未收到邮件，请先查阅您的垃圾邮箱。）。','Index/index');
 				}else{
 					//发送失败的处理逻辑
 					$this->error('申请失败，请检查您的邮箱地址。','index/index');
