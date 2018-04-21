@@ -11,7 +11,7 @@ class Unselected extends Important{
     public function lst(){
         $s_num = session('id');
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
-        $major = $data1['s_major'];
+        $major = preg_replace('/\(.*?\)/', '', $data1['s_major']);
         $grade = $data1['s_grade'];
         $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
         $m_id = $data2['m_id']; 
@@ -33,7 +33,7 @@ class Unselected extends Important{
     public function choose(){
         $s_num = session('id');
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
-        $major = $data1['s_major'];
+        $major = preg_replace('/\(.*?\)/', '', $data1['s_major']);
         $grade = $data1['s_grade'];
         $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
         $m_id = $data2['m_id']; 
