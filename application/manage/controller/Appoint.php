@@ -26,7 +26,6 @@ class Appoint extends Base{
                 $this->error('您输入的教工号不正确，请返回重新输入');
             }
         }
-        echo 11;
         return $this->fetch(); 
     }
     
