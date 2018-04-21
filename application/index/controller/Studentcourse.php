@@ -10,7 +10,7 @@ class Studentcourse extends Important{
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
         $major = preg_replace('/\(.*?\)/', '', $data1['s_major']);
         $grade = $data1['s_grade'];
-        $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name','like',$major)->where('major_grade',$grade)->find();
+        $data2 = \think\Db::name('major')->field('m_id')->where('major_name','like',$major)->where('major_grade',$grade)->find();
         $m_id = $data2['m_id']; 
         $data3 = \think\Db::table("system_"."$m_id"."_course")->field('c_id')->where('s_num',$s_num)->where('status',1)->select();
         $length = count($data3);
@@ -29,9 +29,9 @@ class Studentcourse extends Important{
     public function remove(){
         $s_num = session('id');
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
-        $major = $data1['s_major'];
+        $major = preg_replace('/\(.*?\)/', '', $data1['s_major']);
         $grade = $data1['s_grade'];
-        $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
+        $data2 = \think\Db::name('major')->field('m_id')->where('major_name','like',$major)->where('major_grade',$grade)->find();
         $m_id = $data2['m_id']; 
         $c_id = input('c_id');
         $id = $s_num . $c_id;

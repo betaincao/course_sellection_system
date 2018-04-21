@@ -4,6 +4,7 @@
  */
 namespace app\index\controller;
 use think\Controller;
+use think\Request; 
 class Teacher extends ImportantTeacher{
     public function teaching(){
         $t_num = session('t_id');
@@ -35,8 +36,15 @@ class Teacher extends ImportantTeacher{
         $this->assign('teacher',$data);
         return $this->fetch();
     }
-    public function studentList(){
+    public function studentList(Request $request){
         $c_id = input('c_id');
+        $page = input('page');
+        if(isset($page)){
+            $page = input('page');
+        }else{
+            $page = 1;
+        }
+        $page_size = 10;
         $courseInfo = \think\Db::name("course")->field('c_major,c_grade,c_name,c_num')->where('c_id',$c_id)->find();
         $tableId = \think\Db::name("major")->field('m_id')->where('major_name',$courseInfo['c_major'])->where('major_grade',$courseInfo['c_grade'])->find();
         $tableName = $tableId['m_id'] . '_course';
@@ -45,8 +53,33 @@ class Teacher extends ImportantTeacher{
         foreach($scInfo as $key=>$value){
             $scInfo1[] = $value['s_num'];
         }
-        $data = \think\Db::name("student")->field('name,s_num,s_class')->where('s_num','in',$scInfo1)->order('s_num desc')->select();
+        $data = \think\Db::name("student")->field('name,s_num,s_class')->where('s_num','in',$scInfo1)->order('s_class asc')->select();
         $length = count($data);
+        if($length){
+            if($length < $page_size){
+                $page_count = 1;
+            }if($page % $page_size){
+                $page_count = (int)($length/$page_size+1);
+            }else{
+                $page_count = $length/$page_size;
+            }
+        }else{
+            $page_count = 0;
+        }
+        $turn_page = '';
+        $url = $request->path();
+        if($page == 1){
+            $turn_page .= '首页 | 上一页 |';
+        }else{
+            $turn_page .= '<a href ='.$c_id.'/page/1>首页</a> | <a href ='. ($page-1).'> 上一页</a> |';    
+        }
+        if($page_count || $page_count == 0){
+            $turn_page .= '下一页 | 尾页';
+        }else{
+            $turn_page .= '<a href='. ($page+1).'> 下一页</a>|<a href='. $page_count .'> 尾页 </a>';
+        }
+        //分页
+        //echo $turn_page;die;
         $this->assign('length',$length);
         $this->assign('courseInfo',$courseInfo);
         $this->assign('studentList',$data);
