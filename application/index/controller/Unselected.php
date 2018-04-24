@@ -50,17 +50,22 @@ class Unselected extends Important{
             if($db){
                 return $this->success('选择成功！','studentcourse/lst');
             }else{
-                return $this->redirect('lst');
+                return $this->error('出错啦~','lst');
             }
         }       
     }
     /**
      * 未选择的课程详细信息
+     * 详细信息中随意修改URL栏，会取到课程信息。后期修改时，进行限制。
      */
     public function details(){
         $c_id = input('c_id');
-        $data = \think\Db::name("course")->where('c_id',$c_id)->find();
-        $this->assign('course',$data);
-        return $this->fetch();
+        if($c_id){
+            $data = \think\Db::name("course")->where('c_id',$c_id)->find();
+            $this->assign('course',$data);
+            return $this->fetch();
+        }else{
+            $this->error('页面出错~');
+        }
     }
 }
