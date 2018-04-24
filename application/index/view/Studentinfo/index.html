@@ -88,6 +88,12 @@
 							课程列表
 						</li>
 					</a>
+					<a href="{:url('Studentcourse/history')}">
+						<li>
+							<span class="icon icon-cloud">&nbsp;</span>
+							历史课程
+						</li>
+					</a>
 					<a href="{:url('Notice/index')}">
 						<li>
 							<span class="icon icon-bell-alt">&nbsp;</span>
@@ -124,8 +130,16 @@
 					<div class="list-cont">{$student['s_num']}</div>
 				</div>
 				<div class="main-list clearfix">
+						<div class="list-opt">专业：</div>
+						<div class="list-cont">{$student['s_major']}</div>
+					</div>
+					<div class="main-list clearfix">
+							<div class="list-opt">班级：</div>
+							<div class="list-cont">{$student['s_class']}</div>
+						</div>
+				<div class="main-list clearfix">
 					<div class="list-opt">邮箱：</div>
-					<div class="list-cont">{$student['s_mail']}</div>
+					<div class="list-cont" id="email">{$student['s_mail']}</div>
 					<button class="btn btn-danger btn-sm" id="modifyEmailBtn">修改邮箱</button>
 				</div>
 				<div class="main-list clearfix">
@@ -137,10 +151,17 @@
 		</div>
 	</div>
 	
-	<!-- 底部版权 -->
-	<div class="layout-copy">
-	    2017 &copy; 西安邮电大学
-	</div>
+	<!-- Footer区域 -->
+	<div class="el-footer">
+			<div class="links"> 
+				<a target="_blank" href="http://www.xiyou.edu.cn/">西安邮电大学</a> | 
+				<a target="_blank" href="http://cs.xupt.edu.cn:81/xiyoucs/index.asp">计算机学院</a> | 
+				 
+				<a target="_blank" href="http://222.24.63.100:9149/CAL">计算机应用技术协会</a>
+			</div>
+			<p class="copyright"> Copyright © 2018 ACAT All Rights Reserved </p>
+		</div>
+		
 	<!--修改邮箱 -->
 	<div id="modalEmailWarp">
 		<div id="modalEmail">
@@ -166,7 +187,7 @@
 	</div>
 
 	<script>
-		// 模态框
+		//模态框
 		function modifyFn(btn,wrap,mod){
 			var oModifyBtn = document.getElementById(btn);
 			var oModalWarp = document.getElementById(wrap);
@@ -181,8 +202,28 @@
 				window.event ? window.event.cancelBubble = true : e.stopPropagation();
 			}
 		}
+
+      //邮箱为空的情况下，修改密码的弹窗不出现
+		function modifyJudge(){
+			var passwordBtn = document.getElementById("modifyPwdBtn");
+			var email = document.getElementById("email");
+			console.log(email.innerHTML);
+			var modalPwdWarp = document.getElementById("modalPwdWarp");
+			passwordBtn.onclick = function(){
+				if(email.innerHTML==""){
+                     modalPwdWarp.style.display="none";
+					 alert("修改密码前请先修改您的邮箱，以便找回密码。");
+				}
+				else{
+					modalPwdWarp.style.display="block";
+				}
+			}
+
+
+		}
 		modifyFn('modifyEmailBtn','modalEmailWarp','modalEmail');
 		modifyFn('modifyPwdBtn','modalPwdWarp','modalPwd');
+		modifyJudge();
 
 		// 密码验证
 		oBtn = document.getElementById('submitPassword');

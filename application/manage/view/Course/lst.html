@@ -28,9 +28,10 @@
                     <table class="result-tab" width="100%">
                         <tr>
                             <th width="6%">课程编号</th>
+                            <th width="12%">课程名称</th>
                             <th width="6%">所属专业</th>
                             <th width="6%">所属年级</th>
-                            <th width="12%">课程名称</th>
+                            <th width="6%">开课部门</th>
                             <th width="4%">考核组织单位</th>
                             <th width="4%">学分</th>
                             <th width="4%">学时</th>
@@ -39,14 +40,15 @@
                             <th width="4%">开课学期</th>
                             <th width="4%">周学时</th>
                             <th width="6%">备注</th>
-                            <th width="15%">操作</th>
+                            <th width="8%">操作</th>
                         </tr>
                         {volist name="course" id="vo"}
                         <tr>
                             <td>{$vo.c_num}</td>
+                            <td >{$vo.c_name}</td>
                             <td >{$vo.c_major}</td>
                             <td>{$vo.c_grade}</td>
-                            <td >{$vo.c_name}</td>
+                            <td >{$vo.c_department}</td>
                             <td >{$vo.c_check_address}</td>
                             <td >{$vo.c_score}</td>
                             <td >{$vo.c_all_time}</td>
@@ -62,6 +64,7 @@
                         </tr>
                         {/volist}
                     </table>
+                    {$page}
                 </div>
             </form>
         </div>

@@ -38,4 +38,32 @@ class BatchExport extends Base{
         }
         return $this->fetch();
     }
+    public function exportCTlstform(){
+        $majorName = \think\Db::name('major')->group('major_name')->select();
+        $majorGrade = \think\Db::name('major')->group('major_grade')->order('major_grade','desc')->select();
+        $this->assign('majorGrade',$majorGrade);
+        $this->assign('majorName',$majorName);
+        return $this->fetch();
+    }
+    public function exportCTlst(){
+        if(request()->isPost()){
+            $s_major = input('major');
+            $s_grade = input('grade');
+            $major = \think\Db::name('major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
+            $m_id = $major['m_id'];
+            //$db= \think\Db::name("$m_id" .  "_course")->where(,)->select();
+
+
+            $student = \think\Db::table('system_student')->field('s_num,name,s_class,s_sex,s_age,s_mail')->where('s_major',$s_major)->where('s_grade',$s_grade)->select();
+            
+
+
+
+
+            require PUBLIC_PATH . '/tools/phpexcel/exportbymajor.php';
+            $name = "$s_major" . "$s_grade" . '选课名单';
+            export($student,$name);
+        }
+        return $this->fetch();
+    }
 }

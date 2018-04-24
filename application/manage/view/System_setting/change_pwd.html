@@ -19,7 +19,7 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="{:url('change_pwd_action')}" method="post" id="myform" name="myform" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="{$name.id}">
                     <table class="insert-tab" width="100%">
                         <tbody>
@@ -32,19 +32,19 @@
                             <tr>
                                 <th width="10%"><i class="require-red">*</i>name：</th>
                                 <td>
-                                    <input class="common-text required" id="c_num"  name="c_num" size="50" value="{$name.name}" type="text">
+                                    <input class="common-text required" id="name"  name="name" size="50" value="{$name.name}" type="text">
                                 </td>
                             </tr>
                             <tr>
                                     <th width="10%"><i class="require-red">*</i>密码：</th>
                                     <td>
-                                        <input class="common-text required" id="c_num"  name="c_num" size="50" type="text">
+                                        <input class="common-text required" id="passpwd"  name="pwd" size="50" type="password">
                                     </td>
                             </tr>
                             <tr>
                                     <th width="10%"><i class="require-red">*</i>确认密码：</th>
                                     <td>
-                                        <input class="common-text required" id="c_num"  name="c_num" size="50" type="text">
+                                        <input class="common-text required" id="pwd2"  name="pwd2" size="50" type="password">
                                     </td>
                             </tr>
                             <tr>

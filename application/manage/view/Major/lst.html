@@ -20,9 +20,6 @@
         <div class="result-wrap">
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
-                    <div class="result-list">
-                        <a href="{:url('Major/add')}"><i class="icon-font"></i>新增专业年级</a>
-                    </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
@@ -30,19 +27,16 @@
                             <th width="3%">ID</th>
                             <th width="15%">专业名称</th>
                             <th width="15%">年级</th>
-                            <th width="15%">操作</th>
                         </tr>
                         {volist name="major" id="vo"}
                         <tr>
                             <td>{$vo.m_id}</td>
                             <td>{$vo.major_name}</a></td>
                             <td>{$vo.major_grade}</a></td>
-                            <td>
-                                <a class="link-del" onclick="return confirm('你确定要删除该专业年级吗？');" href="{:url('del',array('m_id'=>$vo.m_id))}">删除</a>
-                            </td>
                         </tr>
                         {/volist}
                     </table>
+                    {$page}
                 </div>
             </form>
         </div>

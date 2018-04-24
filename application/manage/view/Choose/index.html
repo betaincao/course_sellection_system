@@ -23,9 +23,23 @@
                     <table class="insert-tab" width="100%">
                         <tbody>
                             <tr>
-                                <th width="15%"><i class="require-red">*</i>请输入课程编号：</th>
+                                <th width="10%"><i class="require-red">*</i>专业名称：</th>
                                 <td>
-                                    <input class="common-text required"   name="c_id" size="50" value="" type="text">
+                                    <select class="common-text required" name="major">
+                                            {volist name="majorName" id="vo" empty="当前没有数据"}
+                                                <option value="{$vo.major_name}">{$vo.major_name}</option>
+                                            {/volist}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="8%"><i class="require-red">*</i>年级：</th>
+                                <td>
+                                        <select class="common-text required" name="grade">
+                                                {volist name="majorGrade" id="vo" empty="当前没有数据"}
+                                                    <option value="{$vo.major_grade}">{$vo.major_grade}</option>
+                                                {/volist}
+                                        </select>
                                 </td>
                             </tr>
                             <tr>

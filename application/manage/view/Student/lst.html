@@ -24,7 +24,6 @@
                         <a href="{:url('student/add')}"><i class="icon-font"></i>新增学生信息</a>
                         <a href="{:url('Student/searchbynum')}"><i class="icon-font">&#xe005;</i>按学号查找</a>
                         <a href="{:url('student/searchbyclass')}"><i class="icon-font">&#xe048;</i>按专业班级查找</a>
-                        (共计{$sum}人)
                     </div>
                 </div>
                 <div class="result-content">
@@ -57,6 +56,7 @@
                         </tr>
                         {/volist}
                     </table>
+                    {$page}
                 </div>
             </form>
         </div>

@@ -6,7 +6,24 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
     <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        function tiJiaoZheng(){
+            $("#myform").removeAttr('action');
+            $("#myform").attr('action',"{:url('allchoose')}");
+            $("#myform").submit();
+        }
+
+        function tiJiao(){
+            $("#myform").removeAttr('action');
+            $("#myform").attr('action',"{:url('distribute/insertdata')}");
+            $("#myform").submit();
+        }
+    });
+</script>
 <body>
     {include file="Public/top" /}
 <div class="container clearfix">
@@ -19,38 +36,30 @@
         <div class="result-wrap">
             <form name="myform" id="myform" method="post" action="{:url('distribute/insertdata')}">
                 <div class="result-title">
-                    {$major}{$grade}级在第 <B><font color="red">{$course[0]['c_semester']}</font></B> 学期有以下<B><font color="red">{:count($course)}</font></B>门课程，请设置学生选课数量：
+                    {$major}{$grade}级在第 <B><font color="red">{$semester}</font></B> 学期有以下<B><font color="red">{:count($course)}</font></B>门课程，请设置学生选课数量：
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-                            <th width="6%">课程编号</th>
-                            <th width="6%">所属专业</th>
-                            <th width="6%">所属年级</th>
-                            <th width="12%">课程名称</th>
-                            <th width="3%">考核组织单位</th>
-                            <th width="3%">学分</th>
-                            <th width="3%">学时</th>
-                            <th width="3%">理论学时</th>
-                            <th width="3%">实验学时</th>
-                            <th width="3%">开课学期</th>
-                            <th width="3%">周学时</th>
-                            <th width="3%">备注</th>
-                            <th width="6%">设置</th>
+                            <th width="">操作</th>
+                            <th width="">课程编号</th>
+                            <th width="">课程名称</th>
+                            <th width="">所属专业</th>
+                            <th width="">所属年级</th>
+                            <th width="">考核组织单位</th>
+                            <th width="">开课部门</th>
+                            <th width="">备注</th>
+                            <th width="">设置</th>
                         </tr>
                         {volist name="course" id="vo" empty="当前没有数据"}
                         <tr>
+                            <td><input type="checkbox" name="c_id[]" value="{$vo.c_id}"></td>
                             <td>{$vo.c_num}</td>
+                            <td >{$vo.c_name}</td>
                             <td >{$vo.c_major}</td>
                             <td>{$vo.c_grade}</td>
-                            <td >{$vo.c_name}</td>
                             <td >{$vo.c_check_address}</td>
-                            <td >{$vo.c_score}</td>
-                            <td >{$vo.c_all_time}</td>
-                            <td >{$vo.c_theoretical_time}</td>
-                            <td >{$vo.c_test_hours}</td>
-                            <td >{$vo.c_semester}</td>
-                            <td >{$vo.c_week_time}</td>
+                            <td >{$vo.c_department}</td>
                             <td >{$vo.c_remarks}</td>
                             <td ><a onclick="return confirm('确定设置为整班选课？');" href = {:url('distribute/allchoose',array('c_id'=>$vo.c_id))}>整班选课</a></td>
                         </tr>
@@ -76,6 +85,7 @@
                 </table>
                 </div>
             </form>
+
         </div>
     </div>
     <!--/main-->

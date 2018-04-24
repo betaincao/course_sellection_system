@@ -24,7 +24,7 @@ class Index extends Controller{
     }
     public function logout(){
         session(null);
-        return $this->success('退出成功！',url('index'));
+        return $this->success('退出成功！',url('index/index/index'));
     }
 
 

@@ -4,6 +4,7 @@
 */
 namespace app\manage\controller;
 use think\Controller;
+use app\manage\model\CreateTable as log;
 header("Content-Type: text/html; charset=utf-8");
 class BatchImport extends Base{
     public function index(){
@@ -43,23 +44,38 @@ class BatchImport extends Base{
             unlink($savePath ."/" . $file_name);
             /*对生成的数组进行数据库的写入*/
             foreach ($res as $k => $v) {
-                
                     $data[$k]['s_num'] = $v[0];
                     $data[$k]['name'] = $v[1];
                     $data[$k]['s_sex'] = $v[2];
                     $data[$k]['s_age'] = $v[3];
-                    $data[$k]['password'] = md5('111111');
+                    $data[$k]['password'] = md5("$v[0]");
                     $data[$k]['s_major'] = $v[4];
                     $data[$k]['s_grade'] = $v[5];
                     $data[$k]['s_mail'] = '';
-                    $data[$k]['s_class'] = $v[6];
-                
-                
+                    $data[$k]['s_class'] = $v[6];    
             }
             //var_dump($data);die;
             //插入的操作最好放在循环外面
             $result = @\think\Db::name('student')->insertAll($data,$replace=true);
             if($result){
+                //导入成功过后，查询数据库中的专业年级，并对新加入的专业年级建立对应的表
+                $data = \think\Db::name('student')->field('s_major,s_grade')->group('s_major,s_grade')->select();
+                $length = count($data);
+                for($i=0;$i<$length;$i++){
+                    $data1 = [
+                        'major_name' => $data["$i"]['s_major'],
+                        'major_grade' => $data["$i"]['s_grade'],
+                    ];
+                    $res = \think\Db::name('major')->where('major_name',$data1['major_name'])->where('major_grade',$data1['major_grade'])->find();
+                    if($res){    
+                    }else{
+                        $tablename = \think\Db::name('major')->insertGetId($data1);
+                        if($tablename){
+                            $create = new log;
+                            $result1=$create -> create_table($tablename);
+                        }
+                    }
+                }
                 $this->success('导入成功！');
             }else{
                 $this->error('导入失败，请检查数据正确性');
@@ -67,6 +83,8 @@ class BatchImport extends Base{
         }
         return $this->fetch();
     }
+
+
     public function importteacher(){
         if (!empty ($_FILES ['file_stu'] ['name'])) {
             $name = $_FILES['file_stu']['name'];
@@ -158,14 +176,15 @@ class BatchImport extends Base{
                     $data[$k]['c_major'] = $v[1];
                     $data[$k]['c_grade'] = $v[2];
                     $data[$k]['c_name'] = $v[3];
-                    $data[$k]['c_check_address'] = $v[4];
-                    $data[$k]['c_score'] = $v[5];
-                    $data[$k]['c_all_time'] = $v[6];
-                    $data[$k]['c_theoretical_time'] = $v[7];
-                    $data[$k]['c_test_hours'] = $v[8];
-                    $data[$k]['c_semester'] = $v[9];
-                    $data[$k]['c_week_time'] = $v[10];
-                    $data[$k]['c_remarks'] = $v[11];
+                    $data[$k]['c_department'] = $v[4];
+                    $data[$k]['c_check_address'] = $v[5];
+                    $data[$k]['c_score'] = $v[6];
+                    $data[$k]['c_all_time'] = $v[7];
+                    $data[$k]['c_theoretical_time'] = $v[8];
+                    $data[$k]['c_test_hours'] = $v[9];
+                    $data[$k]['c_semester'] = $v[10];
+                    $data[$k]['c_week_time'] = $v[11];
+                    $data[$k]['c_remarks'] = $v[12];
 
             }
             //插入的操作最好放在循环外面

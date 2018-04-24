@@ -21,7 +21,6 @@
             <form name="myform" id="myform" method="post">
                     <div class="result-title">
                             <div class="result-list">
-                                共有&nbsp;<B><font color="red">{$data.length}</font></B>&nbsp;人选择&nbsp;<B>{$data.major}</B>&nbsp;&nbsp;专业&nbsp;&nbsp;<B>{$data.grade}</B>&nbsp;&nbsp;级&nbsp;&nbsp;<B>{$data.c_name}</B>&nbsp;课程
                             </div>
                         </div>
                         <div class="result-content">
@@ -39,6 +38,7 @@
                                     </tr>
                                     {/volist}
                                 </table>
+                                {$page}
                             </div>
                 </div>
             </form>

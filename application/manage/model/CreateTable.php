@@ -18,6 +18,7 @@ class CreateTable extends Model
 			`lang` char(8) NOT NULL comment '设置几选几（3,2）',
 			`all` int NOT NULL DEFAULT 0 COMMENT '整班选课0：不是整班选课，1：是整班选课',
 			`status` int NOT NULL COMMENT '学生选中状态0:学生没选这门课，1：学生选择了这门课',
+			`semester` int NOT NULL COMMENT '学期',
 			`create_time` char(12) NOT NULL COMMENT '创建时间2018-02-11',		
 			PRIMARY KEY ( `id` )
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -10,7 +10,9 @@ class Course extends Base{
      * 课程展示
      */
     public function lst(){
-        $course = \think\Db::table('system_course')->order('c_id desc')->select();
+        $course = \think\Db::table('system_course')->order('c_id desc')->paginate(15);
+        $page = $course->render();
+        $this->assign('page',$page);
         //dump($course);die();
         $this->assign('course',$course);
         return $this->fetch();
@@ -20,6 +22,8 @@ class Course extends Base{
      * 新增课程
      */
     public function add(){
+        //$major = \think\Db::name('major')->field('majorname')->groupby('majorname')->select();
+        //var_dump($major);die;
         if(request()->isPost()){
             $data=[
                 'c_num' =>input('c_num'),

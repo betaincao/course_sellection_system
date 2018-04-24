@@ -15,15 +15,15 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="{:url('distribute/index')}">分配课程</a><span class="crumb-step">&gt;</span><span>分配</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><span>导出模板</span></div>
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="{:url('exportCTlst')}" method="post" id="myform" name="myform" enctype="multipart/form-data">
                     <table class="insert-tab" width="100%">
                         <tbody>
                             <tr>
-                                <th width="10%"><i class="require-red">*</i>专业名称：</th>
+                                <th width="8%"><i class="require-red">*</i>专业名称：</th>
                                 <td>
                                     <select class="common-text required" name="major">
                                             {volist name="majorName" id="vo" empty="当前没有数据"}

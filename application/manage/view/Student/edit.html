@@ -26,7 +26,7 @@
                             <tr>
                                     <th width="10%"><i class="require-red">*</i>学号：</th>
                                     <td>
-                                        <input class="common-text required" id="s_num"  name="s_num" size="50" value="{$student.s_num}" type="text">
+                                        <input class="common-text required" id="s_num"  name="s_num" size="50" value="{$student.s_num}" type="text" onfocus=this.blur()>
                                     </td>
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                             <tr>
                                 <th width="10%"><i class="require-red">*</i>个人邮箱：</th>
                                 <td>
-                                    <input class="common-text required" id="s_mail" placeholder="123456789@***.com" name="s_mail" size="50" value="{$student.s_mail}" type="text">
+                                    <input class="common-text required" id="s_mail" name="s_mail" size="50" value="{$student.s_mail}" type="text">
                                 </td>
                             </tr>
                             <tr>

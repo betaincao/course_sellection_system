@@ -5,9 +5,9 @@ header("Content-Type: text/html; charset=utf-8");
 class Student extends Base{
     //学生信息展示
     public function lst(){
-        $student = \think\Db::table('system_student')->order('s_grade asc')->select();
-        $length = count($student);
-        $this->assign('sum',$length);
+        $student = \think\Db::table('system_student')->order('s_grade asc')->paginate(15);
+        $page = $student->render();
+        $this->assign('page',$page);
         $this->assign('student',$student);
         return $this->fetch();
         //return json_encode($course);

@@ -154,7 +154,7 @@ return [
     'exception_tmpl'         => THINK_PATH . 'tpl' . DS . 'think_exception.tpl',
 
     // 错误显示信息,非调试模式有效
-    'error_message'          => '页面错误！请稍后再试～',
+    'error_message'          => '您要查看的页面不存在或已删除！',
     // 显示错误信息
     'show_error_msg'         => false,
     // 异常处理handle类 留空使用 \think\exception\Handle
@@ -234,7 +234,7 @@ return [
 
     //分页配置
     'paginate'               => [
-        'type'      => 'bootstrap',
+        'type'      => 'page\Page',
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
@@ -257,7 +257,8 @@ return [
         // 验证码图片宽度
         'imageW'   => 175, 
         // 验证码位数
-        'length'   => 4, 
+        'length'   => 4,
+        //'length'   => 1, 
         // 验证成功后是否重置        
         'reset'    => true
     ],
