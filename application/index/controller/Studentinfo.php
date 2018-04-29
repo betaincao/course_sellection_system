@@ -8,6 +8,12 @@ class Studentinfo extends Important{
     public function index(){
         $s_num = session('id');
         $data = \think\Db::name("student")->where('s_num',$s_num)->find();
+        $planPath = \think\Db::name("plan")->field('p_path')->where('p_major',$data['s_major'])->where('p_grade',$data['s_grade'])->find();
+        $path = '#';
+        if($planPath){
+            $path = '/uploads/' . $planPath['p_path'];    
+        }
+        $this->assign('planPath',$path);
         $this->assign('student',$data);
         return $this->fetch();
     }

@@ -11,6 +11,12 @@ class Unselected extends Important{
     public function lst(){
         $s_num = session('id');
         $data1= \think\Db::name("student")->where('s_num',$s_num)->find();
+        $planPath = \think\Db::name("plan")->field('p_path')->where('p_major',$data1['s_major'])->where('p_grade',$data1['s_grade'])->find();
+        $path = '#';
+        if($planPath){
+            $path = '/uploads/' . $planPath['p_path'];    
+        }
+        $this->assign('planPath',$path);
         $major = $data1['s_major'];
         $grade = $data1['s_grade'];
         $data2 = \think\Db::table('system_major')->field('m_id')->where('major_name',$major)->where('major_grade',$grade)->find();
