@@ -21,14 +21,15 @@
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-                            <th width="6%">课程编号</th>
-                            <th width="12%">课程名称</th>
-                            <th width="6%">所属专业</th>
-                            <th width="6%">所属年级</th>
-                            <th width="4%">考核组织单位</th>
-                            <th width="4%">开课单位</th>
-                            <th width="6%">备注</th>
-                            <th width="15%">操作</th>
+                            <th width="">课程编号</th>
+                            <th width="">课程名称</th>
+                            <th width="">所属专业</th>
+                            <th width="">所属年级</th>
+                            <th width="">考核组织单位</th>
+                            <th width="">开课单位</th>
+                            <th width="">备注</th>
+                            <th>已选人数</th>
+                            <th width="">操作</th>
                         </tr>
                         {volist name="course" id="vo"}
                         <tr>
@@ -39,9 +40,11 @@
                             <td >{$vo.c_check_address}</td>
                             <td >{$vo.c_department}</td>
                             <td >{$vo.c_remarks}</td>
+                            <td>{$vo.sum}</td>
                             <td>
                                 <a class="link-update" href="{:url('studentlst',array('c_id'=>$vo.c_id,'m_id'=>$m_id))}"><i class="icon-font">&#xe002;</i>选课名单</a>&nbsp;
                                 <a class="link-update" href="{:url('appoint/index',array('c_id'=>$vo.c_id))}"><i class="icon-font">&#xe002;</i>指定教师</a>&nbsp;
+                                <a class="link-update" href="{:url('exportNameLst',array('c_id'=>$vo.c_id,'m_id'=>$m_id))}"><i class="icon-font">&#xe002;</i>导出名单</a>&nbsp;
                             </td>
                         </tr>
                         {/volist}

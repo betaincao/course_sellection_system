@@ -12,11 +12,15 @@ class Plan extends Base{
     }
     //添加培养计划方法:文件上传
     public function add(){
+        $majorName = \think\Db::name('major')->group('major_name')->select();
+        $majorGrade = \think\Db::name('major')->group('major_grade')->order('major_grade','desc')->select();
+        $this->assign('majorGrade',$majorGrade);
+        $this->assign('majorName',$majorName);
         //文件上传
         $file = request()->file('p_path');
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
-            $info = $file->validate(['ext'=>'pdf'])->rule('uniqid')->move('uploads');
+            $info = $file->validate(['ext'=>'pdf'])->rule('date')->move('uploads');
             // 成功上传后 获取上传信息
             if($info){
             //原文件名，用于命名本培养计划，对应数据库p_name字段
@@ -32,10 +36,10 @@ class Plan extends Base{
             $data=[
                 'p_id' => input('p_id'),
                 //上传的文件的名字为专业+年级+文件名
-                'p_name' =>input('p_major') . input('p_grade') . trim($filename,'.pdf'),
+                'p_name' =>input('major') . input('grade') . trim($filename,'.pdf'),
                 'p_path' => $p_path,
-                'p_major' =>input('p_major'),
-                'p_grade' =>input('p_grade'),
+                'p_major' =>input('major'),
+                'p_grade' =>input('grade'),
             ];
             $validate = \think\Loader::validate('Plan');
             if($validate->check($data)){

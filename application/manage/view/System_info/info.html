@@ -19,7 +19,7 @@
             <div class="result-content">
                 <ul class="sys-info-list">
                     <li>
-                        <label class="res-lab">用户名</label><span class="res-info">admin</span>
+                        <label class="res-lab">用户名</label><span class="res-info">{:session('a_name')}</span>
                     </li>
                     <li>
                         <label class="res-lab">服务器时间</label><span class="res-info">{:date('Y-m-t H:i:s',time())}</span>
@@ -34,7 +34,7 @@
                         <label class="res-lab">PHP运行方式</label><span class="res-info">{:php_sapi_name()}</span>
                     </li>
                     <li>
-                        <label class="res-lab">系统版本号</label><span class="res-info">v-1.0</span>
+                        <label class="res-lab">系统版本号</label><span class="res-info">v-1.5</span>
                     </li>
                     <li>
                         <label class="res-lab">ThinkPHP版本</label><span class="res-info">{:THINK_VERSION}</span>
