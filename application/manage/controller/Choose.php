@@ -68,8 +68,7 @@ class Choose extends Base{
         foreach($s_num as $value){
             $data[] = $value['s_num'];
         }
-        $length = count($s_num);
-        $studentinfo = \think\Db::table('system_student')->where('s_num','in',$data)->field('s_num,name,s_class')->order('s_class asc')->select();
+        $studentinfo = \think\Db::table('system_student')->where('s_num','in',$data)->field('s_num,name,s_class')->order('s_class asc')->order('s_num asc')->select();
         if($studentinfo){
             require PUBLIC_PATH . '/tools/phpexcel/exportchoosed.php';
             $name = $major['major_name'] . $major['major_grade'] .'级《'. $courseName['c_name'] .'》选课名单';
