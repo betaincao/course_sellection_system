@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算机学院网上选课系统后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/admin/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/static/admin/js/libs/modernizr.min.js"></script>
+</head>
+<body>
+    {include file="Public/top" /}
+<div class="container clearfix">
+    {include file="Public/left" /}
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="{:url('Index/home')}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">教师课程管理</span></div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-title">
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th width="">课程编号</th>
+                            <th width="">课程名称</th>
+                            <th width="">教师编号</th>
+                            <th width="">教师姓名</th>
+                            <th width="">操作</th>
+                        </tr>
+                        {foreach name="data" item="vo" key="k"}
+                        <tr>
+                            <td>{$vo['course']['c_num']}</td>
+                            <td >{$vo['course']['c_name']}</td>
+                            <td >{$vo['teacher']['t_num']}</td>
+                            <td>{$vo['teacher']['name']}</td>
+                            <td>
+                                <a class="link-update" href="{:url('edit',array('c_id'=>$vo['course']['c_num']))}"><i class="icon-font">&#xe002;</i>修改</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>
