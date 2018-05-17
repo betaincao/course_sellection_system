@@ -24,7 +24,7 @@ class Courseteacher extends Base{
             $this->assign('data',$data);
             return $this->fetch();
         }else{
-            $this->error('暂无数据');
+            $this->error('暂无数据，请先指定课程对应的教师。');
         }
     }
         
