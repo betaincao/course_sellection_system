@@ -10,6 +10,9 @@ class Choose extends Base{
         $this->assign('majorName',$majorName);
         return $this->fetch();
     }
+    /**
+     * 某专业某年级的所有课程的信息，已选人数
+     */
     public function check(){
         if(request()->isPost()){
             $major = input('major');
@@ -33,7 +36,9 @@ class Choose extends Base{
             }
         }
     }
-    //展示
+    /**
+     * 某门课程选课学生名单 
+     */
     public function studentlst(){
         $m_id = input('m_id');
         $c_id = input('c_id');
@@ -56,6 +61,9 @@ class Choose extends Base{
             $this->error('没有学生选择这门课');
         }
     }
+    /**
+     * 导出某门课程已选学生名单
+     */
     public function exportNameLst(){
         $m_id = input('m_id');
         $c_id = input('c_id');
@@ -76,5 +84,9 @@ class Choose extends Base{
         }else{
             $this->error('暂无数据');
         }
+    }
+    //全部课程选课信息统计
+    public function countAll(){
+
     }
 }
